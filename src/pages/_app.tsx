@@ -1,9 +1,14 @@
-import "../styles/global.css";
+import React from "react";
+import { AuthProvider } from "../contexts/AuthContext";
+import '../styles/global.css'
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
+
   return (
-    <Component {...pageProps} />
-  );
+    <AuthProvider>
+      <Component {...pageProps}/>
+    </AuthProvider>
+  )
 }
 
-export default MyApp;
+export default App

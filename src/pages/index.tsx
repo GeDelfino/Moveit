@@ -1,12 +1,14 @@
-import { CompletedChallenges } from "../components/CompletedChallenges";
+import React, { useContext } from 'react';
+import { CompleteChallengs } from "../components/CompletedChallenges";
 import { Countdown } from "../components/Countdown";
-import ExperienceBar from "../components/ExperienceBar";
+import { ExperienceBar } from "../components/ExperienceBar";
 import { Profile } from "../components/Profile";
-import styles from "../styles/pages/Home.module.css";
-import { GetServerSideProps } from 'next';
-
-import Head from "next/head";
 import { ChallengeBox } from "../components/ChallengeBox";
+
+import Head from "next/head"
+import { GetServerSideProps } from "next"
+
+import styles from '../styles/pages/Home.module.css';
 import { CountdownProvider } from "../contexts/CountdownContext";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
 
@@ -16,16 +18,16 @@ interface HomeProps {
   challengesCompleted: number;
 }
 
-export default function Home(props) {
+export default function Home(props: HomeProps) {
   return (
-    <ChallengesProvider
+    <ChallengesProvider 
       level={props.level}
       currentExperience={props.currentExperience}
       challengesCompleted={props.challengesCompleted}
     >
-      <div className={styles.container}>
+      <div className={styles.container}> 
         <Head>
-          <title>Início | Move.it</title>
+          <title>Início | MoveIt</title>
         </Head>
         <ExperienceBar />
 
@@ -33,7 +35,7 @@ export default function Home(props) {
           <section>
             <div>
               <Profile />
-              <CompletedChallenges />
+              <CompleteChallengs />
               <Countdown />
             </div>
             <div>
@@ -43,21 +45,27 @@ export default function Home(props) {
         </CountdownProvider>
       </div>
     </ChallengesProvider>
-  );
+  )
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies
 
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+
+  const { level, currentExperience, challengesCompleted, user } = ctx.req.cookies;
+
+  if (user == undefined) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login',
+      },
+    }
+  }
   return {
     props: {
       level: Number(level),
       currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted)
+      challengesCompleted: Number(challengesCompleted),
     }
   }
 }
-
-//Back-end (C#)
-// Next.js (node.js)
-// Front-end (React)

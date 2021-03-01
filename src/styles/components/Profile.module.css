@@ -1,15 +1,16 @@
 .profileContainer {
     display: flex;
     align-items: center;
-
 }
+
 .profileContainer > img {
     width: 5.5rem;
     height: 5.5rem;
     border-radius: 50%;
 }
 
-.profileContainer div {
+.profileContainer > div {
+    width: 20rem;
     margin-left: 1.5rem;
 }
 
@@ -19,10 +20,26 @@
     color: var(--title);
 }
 
-.profileContainer div p {
+.profileContainer div p{
     font-size: 1rem;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
 }
-.profileContainer div p > img {
-    margin-right: .5rem;
+
+.profileContainer div div {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profileContainer div div button {
+    color:brown;
+    border: 0;
+}
+
+.username {
+    margin-left: 1.2rem;
+}
+
+.profileContainer div img{
+    margin-right: 0.5rem;
 }
