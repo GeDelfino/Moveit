@@ -21,10 +21,10 @@ export const CountdownContext = createContext({} as CountdownContextData);
 
 export function CountdownProvider({children} : CountdownProviderProps) {
     const { startNewChallenge, activeChallenge } = useContext(ChallengesContext);
-    const [time, setTime] = useState(30);
+    const [time, setTime] = useState(1500);
     const [isActive, setIsActive] = useState(false);
     const [hasFinished, setHasFinished] = useState(false);
-    let tempo = 0.5;
+    let tempo = 25;
 
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
